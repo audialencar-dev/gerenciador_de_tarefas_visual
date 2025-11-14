@@ -1,0 +1,109 @@
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Fundo */
+body {
+  background: #f3f0ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Caixa principal */
+.app {
+  background: #fff;
+  width: 100%;
+  max-width: 420px;
+  padding: 24px 20px 32px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* Cabeçalho */
+header h1 {
+  font-size: 1.4rem;
+  color: #4a3aaa;
+  margin-bottom: 4px;
+}
+
+header p {
+  color: #6d6d6d;
+  margin-bottom: 18px;
+}
+
+/* Formulário */
+form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+form input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+}
+
+form button {
+  background: #7056ff;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+form button:hover {
+  filter: brightness(0.92);
+}
+
+/* Lista de tarefas */
+#lista-tarefas {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Cada tarefa */
+.tarefa {
+  background: #f8f7ff;
+  border: 1px solid #eee;
+  padding: 10px 12px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tarefa-texto.concluida {
+  text-decoration: line-through;
+  color: #9f9f9f;
+}
+
+/* Botões de ação */
+.btns {
+  display: flex;
+  gap: 6px;
+}
+
+.botao-pequeno {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: #7056ff;
+}
+
+.botao-pequeno.excluir {
+  color: #e85050;
+}
