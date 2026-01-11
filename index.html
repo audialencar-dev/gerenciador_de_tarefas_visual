@@ -3,9 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gerenciador de Tarefas</title>
+  <title>Gerenciador de Tarefas Visual</title>
+
+  <!-- CSS principal -->
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Ícones do Font Awesome (para o check e a lixeirinha) -->
+  <link
+    rel="stylesheet"
+    
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2Pk36nFi1R1mI7kG90xJj7r8eUqdLLuCqDyzsFVpys3pCJaT3KX4Ckz+DQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
 </head>
 <body>
   <div class="app">
@@ -24,10 +34,19 @@
       <button type="submit">Adicionar</button>
     </form>
 
-    <ul id="lista-tarefas"></ul>
+   <div class="filtros">
+  <button type="button" data-filtro="todas" class="ativo">Todas</button>
+  <button type="button" data-filtro="pendentes">Pendentes</button>
+  <button type="button" data-filtro="concluidas">Concluídas</button>
+</div>
+
+<ul id="lista-tarefas"></ul>
+<p id="lista-vazia" style="display: none;">
+  Nenhuma tarefa adicionada ainda ✨
+</p>
+
   </div>
 
   <script src="script.js"></script>
 </body>
-</html><link rel="stylesheet" href="style.css" />
-
+</html>

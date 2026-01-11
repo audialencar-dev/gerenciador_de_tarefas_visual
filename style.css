@@ -1,109 +1,422 @@
-/* Reset básico */
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Fundo */
 body {
-  background: #f3f0ff;
+    background: linear-gradient(135deg, #7f5af0, #2cb67d);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 15px;
+    width: 380px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.input-area {
+    display: flex;
+    gap: 10px;
+}
+
+input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2cb67d;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #249a6b;
+}
+
+ul {
+    margin-top: 20px;
+    list-style: none;
+}
+
+li {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+li span {
+    cursor: pointer;
+    font-size: 18px;
+}
+/* Área dos botões de cada tarefa */
+.btns {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  gap: 8px;
 }
 
-/* Caixa principal */
-.app {
-  background: #fff;
-  width: 100%;
-  max-width: 420px;
-  padding: 24px 20px 32px;
-  border-radius: 16px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-}
-
-/* Cabeçalho */
-header h1 {
-  font-size: 1.4rem;
-  color: #4a3aaa;
-  margin-bottom: 4px;
-}
-
-header p {
-  color: #6d6d6d;
-  margin-bottom: 18px;
-}
-
-/* Formulário */
-form {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 18px;
-}
-
-form input {
-  flex: 1;
-  padding: 10px 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  outline: none;
-}
-
-form button {
-  background: #7056ff;
-  color: #fff;
+/* Botões pequenos (concluir / excluir) */
+.botao-pequeno {
   border: none;
-  padding: 10px 16px;
   border-radius: 8px;
+  padding: 6px 10px;
   cursor: pointer;
-  transition: 0.2s;
-}
-
-form button:hover {
-  filter: brightness(0.92);
-}
-
-/* Lista de tarefas */
-#lista-tarefas {
-  list-style: none;
+  background: #22c55e;          /* verde - concluir */
+  color: white;
+  font-size: 0.9rem;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-/* Cada tarefa */
-.tarefa {
-  background: #f8f7ff;
-  border: 1px solid #eee;
-  padding: 10px 12px;
-  border-radius: 10px;
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
+}
+
+.botao-pequeno:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* Botão excluir (vermelho) */
+.botao-pequeno.excluir {
+  background: #ef4444;
+}
+
+/* Tarefa concluída: texto riscado e mais clarinho */
+.tarefa-texto.concluida {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+/* Animação de entrada das tarefas */
+.tarefa {
+  animation: tarefa-entrando 0.25s ease-out;
+  transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
+}
+
+/* Leve efeito quando passa o mouse na tarefa */
+.tarefa:hover {
+  transform: translateY(-2px);
+}
+
+/* Quando a tarefa estiver concluída, além do texto riscado, o card fica mais suave */
+.tarefa.concluida {
+  opacity: 0.7;
+  transform: scale(0.99);
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* Animação: sobe levemente e aparece */
+@keyframes tarefa-entrando {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Filtros (todas / pendentes / concluídas) */
+.filtros {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.filtros button {
+  border: none;
+  border-radius: 999px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.filtros button:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* Botão de filtro ativo */
+.filtros button.ativo {
+  background: #22c55e;
+  font-weight: bold;
+}
+/* ===== Animações e efeitos (Passo D) ===== */
+
+/* Suaviza transições em todos os botões */
+button {
+  transition: 
+    background-color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    opacity 0.15s ease;
+}
+
+/* Botão principal "Adicionar" */
+button[type="submit"] {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+}
+
+button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Botões pequenos (Concluir / Excluir) */
+.botao-pequeno {
+  transition: 
+    background-color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.botao-pequeno:hover {
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+}
+
+/* Filtros (Todas / Pendentes / Concluídas) */
+.filtros button {
+  transition: 
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.filtros button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+/* Cada tarefa aparece com leve fade-in */
+.tarefa {
+  animation: tarefaFadeIn 0.25s ease;
+  transition: 
+    background-color 0.2s ease,
+    transform 0.15s ease,
+    opacity 0.15s ease;
+}
+
+@keyframes tarefaFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Efeito ao passar o mouse em cima da tarefa */
+.tarefa:hover {
+  background-color: rgba(255, 255, 255, 0.16);
+  transform: translateY(-1px);
+}
+
+/* Tarefa concluída fica mais suave/“apagada” */
+.tarefa.concluida {
+  opacity: 0.7;
+}
+
+.tarefa.concluida:hover {
+  opacity: 0.9;
+  transform: translateY(-1px) scale(1.01);
+}
+
+/* Deixa o texto da tarefa concluída com transição também */
+..tarefa-texto {
+  font-size: 15px;
+  letter-spacing: 0.3px;
+  transition: color 0.2s ease, opacity 0.2s ease, text-decoration-color 0.2s ease;
 }
 
 .tarefa-texto.concluida {
   text-decoration: line-through;
-  color: #9f9f9f;
+  text-decoration-thickness: 2px;
+  text-decoration-color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.7);
+  opacity: 0.8;
+}
+@keyframes tarefaEntrada {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.tarefa-texto {
+  cursor: text;
+}
+.tarefa-texto:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 2px 6px;
+}
+/* Input de edição inline */
+.input-edicao {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 2px solid #7ff5a0;
+  outline: none;
+  font-size: 14px;
 }
 
-/* Botões de ação */
-.btns {
-  display: flex;
-  gap: 6px;
+/* Animação ao editar */
+.tarefa-texto.editado {
+  animation: destaque 0.6s ease;
 }
 
-.botao-pequeno {
-  border: none;
-  background: none;
-  cursor: pointer;
-  font-size: 0.85rem;
-  color: #7056ff;
+@keyframes destaque {
+  0% {
+    background-color: rgba(127, 245, 160, 0.6);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+.tarefa-texto.editado {
+  animation: destaque 0.6s ease;
 }
 
-.botao-pequeno.excluir {
-  color: #e85050;
+@keyframes destaque {
+  from {
+    background-color: rgba(127, 255, 212, 0.6);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+.input-edicao {
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 2px solid #7f5af0;
+  outline: none;
+  font-size: 1rem;
+}
+
+.input-edicao {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 2px solid #6c63ff;
+  outline: none;
+  font-size: 1rem;
+}
+
+.input-edicao {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 2px solid #6c63ff;
+  outline: none;
+  font-size: 1rem;
+}
+.input-edicao {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 2px solid #6c63ff;
+  outline: none;
+  font-size: 1rem;
+}
+
+.input-edicao:focus {
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.3);
+}
+.editado {
+  animation: destaque 0.8s ease;
+}
+
+@keyframes destaque {
+  from {
+    background-color: rgba(108, 99, 255, 0.25);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+.input-edicao {
+  padding: 6px 8px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 2px solid #7c8cff;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+input.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    salvar();
+  }
+
+  if (e.key === 'Escape') {
+    input.replaceWith(span);
+  }
+});
+
+input.addEventListener('blur', salvar);
+
+.tarefa-texto.concluida {
+  text-decoration: line-through;
+  color: #9aa0a6;
+  cursor: not-allowed;
+}
+/* Efeito visual ao excluir tarefa */
+.tarefa.removendo {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  background: rgba(255, 0, 0, 0.15);
+}
+function excluirTarefa(index) {
+  const confirmar = confirm('Tem certeza que deseja excluir esta tarefa?');
+
+  if (!confirmar) return;
+
+  tarefas.splice(index, 1);
+  salvarTarefas();
+  renderizar();
+}
+#lista-vazia {
+  text-align: center;
+  color: #888;
+  margin-top: 20px;
+  font-style: italic;
 }
